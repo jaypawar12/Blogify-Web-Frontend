@@ -21,7 +21,7 @@ export default function ResetPassword() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="text-4xl font-extrabold mb-4 tracking-wide text-shadow-xs text-shadow-white"
+                        className="text-4xl font-extrabold mb-4 tracking-wide text-shadow-xs text-shadow-white/5"
                     >
                         Change Password
                     </motion.h2>
@@ -82,36 +82,36 @@ export default function ResetPassword() {
                         </p>
 
                         {/* ==== NEW PASSWORD ==== */}
-                        <label className="text-sm text-gray-600 font-medium">New Password</label>
+                        <label className="text-sm text-gray-800 font-medium">New Password</label>
                         <div className="relative mb-4 mt-1">
-                            <FiLock className="absolute left-4 top-4.5 text-gray-400" />
+                            <FiLock className="absolute left-4 top-4.5 text-gray-800" />
                             <input
                                 type={showPass ? "text" : "password"}
                                 placeholder="Enter new password"
-                                className="w-full pl-10 pr-10 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300 hover:border-gray-400"
+                                className="w-full pl-10 pr-10 py-3 border rounded-xl border-gray-500 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300 hover:border-gray-400"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPass(!showPass)}
-                                className="absolute right-4 top-4.5 text-gray-400 hover:text-blue-600"
+                                className="absolute right-4 top-4.5 text-gray-800 hover:text-blue-600"
                             >
                                 {showPass ? <FiEyeOff /> : <FiEye />}
                             </button>
                         </div>
 
                         {/* ==== CONFIRM PASSWORD ==== */}
-                        <label className="text-sm text-gray-600 font-medium">Confirm Password</label>
+                        <label className="text-sm text-gray-800 font-medium">Confirm Password</label>
                         <div className="relative mb-6 mt-1">
-                            <FiLock className="absolute left-4 top-4.5 text-gray-400" />
+                            <FiLock className="absolute left-4 top-4.5 text-gray-800" />
                             <input
                                 type={showCPass ? "text" : "password"}
                                 placeholder="Confirm new password"
-                                className="w-full pl-10 pr-10 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300 hover:border-gray-400"
+                                className="w-full pl-10 pr-10 py-3 border rounded-xl border-gray-500 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300 hover:border-gray-400"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowCPass(!showCPass)}
-                                className="absolute right-4 top-4.5 text-gray-400 hover:text-blue-600"
+                                className="absolute right-4 top-4.5 text-gray-800 hover:text-blue-600"
                             >
                                 {showCPass ? <FiEyeOff /> : <FiEye />}
                             </button>

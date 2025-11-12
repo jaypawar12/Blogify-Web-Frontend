@@ -103,11 +103,11 @@ export default function ForgetPassword() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {/* Email Input */}
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-gray-700">
+                                <label className="block text-sm font-medium text-gray-800">
                                     Email Address
                                 </label>
                                 <div className="relative group">
-                                    <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300">
+                                    <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-800 group-focus-within:text-blue-500 transition-colors duration-300">
                                         <FaEnvelope className="text-lg" />
                                     </span>
                                     <input
@@ -115,7 +115,7 @@ export default function ForgetPassword() {
                                         placeholder="you@example.com"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full pl-11 pr-4 py-3.5 border border-gray-300 rounded-xl text-gray-800 
+                                        className="w-full pl-11 pr-4 py-3.5 border border-gray-500 rounded-xl text-gray-800 
                                         focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none 
                                         transition-all duration-300 hover:border-gray-400"
                                         required

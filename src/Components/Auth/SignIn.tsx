@@ -31,14 +31,14 @@ export default function SignIn() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Email Address</label>
           <div className="relative">
-            <FaEnvelope className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FaEnvelope className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type="email"
               placeholder="you@example.com"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg
-              text-gray-700 placeholder-gray-400
+              className="w-full pl-10 pr-4 py-3 border border-gray-500 rounded-lg
+              text-gray-800 placeholder-gray-400
               focus:outline-none focus:ring-2 focus:ring-blue-500
               transition-all duration-300 shadow-sm hover:shadow-md"
               required
@@ -52,21 +52,21 @@ export default function SignIn() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Password</label>
           <div className="relative">
-            <FiLock className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FiLock className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type={showPass ? "text" : "password"}
               placeholder="••••••••"
-              className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg
-              text-gray-700 placeholder-gray-400
+              className="w-full pl-10 pr-12 py-3 border border-gray-500 rounded-lg
+              text-gray-800 placeholder-gray-400
               focus:outline-none focus:ring-2 focus:ring-blue-500
               transition-all duration-300 shadow-sm hover:shadow-md"
               required
             />
             <button
               type="button"
-              className="absolute inset-y-0 right-3 my-auto text-gray-400 hover:text-blue-600 transition"
+              className="absolute inset-y-0 right-3 my-auto text-gray-800 hover:text-blue-600 transition"
               onClick={() => setShowPass(!showPass)}
             >
               {showPass ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -81,7 +81,7 @@ export default function SignIn() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.4 }}
         >
-          <label className="flex items-center gap-2 text-sm text-gray-600">
+          <label className="flex items-center gap-2 text-sm text-gray-800">
             <input type="checkbox" className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" />
             Remember me
           </label>
@@ -114,7 +114,7 @@ export default function SignIn() {
         >
           <motion.button
             type="button"
-            className="flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-lg 
+            className="flex items-center justify-center gap-2 py-3 border border-gray-500 rounded-lg 
             hover:bg-gray-50 transition-all shadow-sm hover:shadow-md"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
@@ -125,7 +125,7 @@ export default function SignIn() {
 
           <motion.button
             type="button"
-            className="flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-lg 
+            className="flex items-center justify-center gap-2 py-3 border border-gray-500 rounded-lg 
             hover:bg-gray-50 transition-all shadow-sm hover:shadow-md"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}

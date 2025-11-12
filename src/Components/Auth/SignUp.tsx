@@ -22,13 +22,13 @@ export default function SignUp() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Full Name</label>
           <div className="relative">
-            <FiUser className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FiUser className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type="text"
               placeholder="John Doe"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg
+              className="w-full pl-10 pr-4 py-3 border border-gray-500 rounded-lg
               focus:ring-2 focus:ring-blue-500 outline-none transition-all
               duration-300 shadow-sm hover:shadow-md"
               required
@@ -42,13 +42,13 @@ export default function SignUp() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Email Address</label>
           <div className="relative">
-            <FiMail className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FiMail className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type="email"
               placeholder="you@example.com"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg
+              className="w-full pl-10 pr-4 py-3 border border-gray-500 rounded-lg
               focus:ring-2 focus:ring-blue-500 outline-none transition-all
               duration-300 shadow-sm hover:shadow-md"
               required
@@ -62,13 +62,13 @@ export default function SignUp() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Password</label>
           <div className="relative">
-            <FiLock className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FiLock className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type={showPass ? "text" : "password"}
               placeholder="••••••••"
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg
+              className="w-full pl-10 pr-10 py-3 border border-gray-500 rounded-lg
               focus:ring-2 focus:ring-blue-500 outline-none transition-all
               duration-300 shadow-sm hover:shadow-md"
               required
@@ -76,7 +76,7 @@ export default function SignUp() {
             {/* Eye Toggle */}
             <button
               type="button"
-              className="absolute inset-y-0 right-3 my-auto text-gray-400 hover:text-blue-600 transition"
+              className="absolute inset-y-0 right-3 my-auto text-gray-800 hover:text-blue-600 transition"
               onClick={() => setShowPass(!showPass)}
             >
               {showPass ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -90,13 +90,13 @@ export default function SignUp() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.4 }}
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+          <label className="block text-sm font-medium text-gray-800 mb-2">Confirm Password</label>
           <div className="relative">
-            <FiCheckCircle className="absolute inset-y-0 left-3 my-auto text-gray-400 text-lg" />
+            <FiCheckCircle className="absolute inset-y-0 left-3 my-auto text-gray-800 text-lg" />
             <input
               type={showCPass ? "text" : "password"}
               placeholder="••••••••"
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg
+              className="w-full pl-10 pr-10 py-3 border border-gray-500 rounded-lg
               focus:ring-2 focus:ring-blue-500 outline-none transition-all
               duration-300 shadow-sm hover:shadow-md"
               required
@@ -104,7 +104,7 @@ export default function SignUp() {
             {/* Eye Toggle */}
             <button
               type="button"
-              className="absolute inset-y-0 right-3 my-auto text-gray-400 hover:text-blue-600 transition"
+              className="absolute inset-y-0 right-3 my-auto text-gray-800 hover:text-blue-600 transition"
               onClick={() => setShowCPass(!showCPass)}
             >
               {showCPass ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -119,7 +119,7 @@ export default function SignUp() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.4 }}
         >
-          <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-300 rounded mt-1" required />
+          <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-500 rounded mt-1" required />
           <p className="ml-2 text-sm text-gray-600">
             I agree to the <span className="text-blue-600 font-medium">Terms</span> &{" "}
             <span className="text-blue-600 font-medium">Privacy Policy</span>

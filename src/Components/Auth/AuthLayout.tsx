@@ -1,24 +1,34 @@
 import { NavLink } from "react-router";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 export default function AuthLayout({ children, title }: any) {
     return (
         <div className="min-h-screen flex flex-col md:flex-row">
 
             {/* Left Section */}
-            <div
+            <motion.div
                 className="w-full md:w-1/2 relative flex flex-col justify-center items-center text-white p-10 
                 overflow-hidden bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: "url('/img/Auth_bg-1.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                 }}
+
             >
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-gray-900/80 backdrop-blur-sm" />
 
                 {/* Content */}
-                <div className="relative z-10 text-center max-w-md">
+                <motion.div
+
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="relative z-10 text-center max-w-md">
                     <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg leading-tight text-shadow-2xs text-shadow-black">
                         Welcome Back!
                     </h1>
@@ -42,8 +52,8 @@ export default function AuthLayout({ children, title }: any) {
                             <FaLock className="text-2xl" />
                         </div>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             {/* Right Section */}
             <div className="w-full md:w-1/2 bg-gradient-to-br from-gray-50 to-blue-50 flex flex-col justify-center 
@@ -62,7 +72,7 @@ export default function AuthLayout({ children, title }: any) {
                     {/* Tabs */}
                     <div className="flex mb-8 bg-gray-200 rounded-xl p-1">
                         <NavLink
-                            to="/signIn"
+                            to="/login"
                             className={({ isActive }) =>
                                 `flex-1 py-3 text-sm font-semibold rounded-lg text-center transition-all duration-300 ${isActive
                                     ? "bg-white text-blue-600 shadow-md"
@@ -74,7 +84,7 @@ export default function AuthLayout({ children, title }: any) {
                         </NavLink>
 
                         <NavLink
-                            to="/signUp"
+                            to="/register"
                             className={({ isActive }) =>
                                 `flex-1 py-3 text-sm font-semibold rounded-lg text-center transition-all duration-300 ${isActive
                                     ? "bg-white text-blue-600 shadow-md"

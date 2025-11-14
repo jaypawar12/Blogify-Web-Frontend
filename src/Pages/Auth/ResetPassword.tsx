@@ -12,10 +12,10 @@ export default function ResetPassword() {
 
             {/* ========= LEFT SIDE ========= */}
             <div
-                className="md:w-1/2 relative flex flex-col justify-center items-center text-black p-10 bg-cover bg-center"
+                className="md:w-1/2 relative flex flex-col justify-center items-center text-white p-10 bg-cover bg-center"
                 style={{ backgroundImage: "url('/img/Auth_bg.png')" }}
             >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-800/10 to-blue-950 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-gray-900/60 to-blue-950 backdrop-blur-[2px]" />
                 <div className="relative z-10 text-center max-w-md">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}

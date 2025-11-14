@@ -1,47 +1,93 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { FaEnvelope } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { motion } from "framer-motion";
 
+import toast from "react-hot-toast";
+import { authService } from "../../Services/AuthService";
+import { ButtonLoader } from "../../Components/ButtonLoader";
+import { ErrorAlert } from "../../Components/ErrorAlert";
+import { routePath } from "../../Routes/routes";
+
 export default function ForgetPassword() {
     const [email, setEmail] = useState("");
+    const [loader, setLoader] = useState(false);
+    const [loginFailed, setLoginFailed] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Password reset link sent to:", email);
+
+        // Empty email
+        if (!email) {
+            setLoginFailed("Email is required.");
+            return;
+        }
+
+        // Invalid email format check
+        const emailRegex =
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            setLoginFailed("Please enter a valid email address.");
+            return;
+        }
+
+        try {
+            setLoader(true);
+            setLoginFailed("");
+
+            const data = await authService.forgotPassword({ email });
+
+            if (!data.error) {
+                toast.success(data.message);
+
+                navigate(routePath.otpVerify, {
+                    replace: true,
+                    state: { email },
+                });
+            } else {
+                setLoginFailed(data.message);
+            }
+
+            setLoader(false);
+        } catch (err) {
+            console.log("Forgot Password Error:", err);
+            toast.error("Something went wrong. Please try again.");
+            setLoader(false);
+        }
     };
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row">
             {/* Left Section */}
             <div
-                className="md:w-1/2 relative flex flex-col justify-center items-center text-black p-10 overflow-hidden bg-cover bg-center bg-no-repeat"
+                className="md:w-1/2 relative flex flex-col justify-center items-center text-white p-10 overflow-hidden bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: "url('/img/Auth_bg.png')",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
                 }}
             >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-800/10 to-blue-950 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-gray-900/60 to-blue-950 backdrop-blur-[2px]" />
 
                 <div className="relative z-10 text-center max-w-md">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl font-bold mb-6 text-shadow-xs text-shadow-white"
+                        className="text-4xl font-bold mb-6"
                     >
                         Reset Your Password
                     </motion.h1>
+
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-blue-100 text-lg leading-relaxed"
                     >
-                        Enter your email address and we'll send you a one-time password to reset your password and secure your account.
+                        Enter your email address and we'll send you a one-time
+                        password to reset your account.
                     </motion.p>
                 </div>
             </div>
@@ -59,14 +105,20 @@ export default function ForgetPassword() {
                         <div className="p-2 bg-blue-100 rounded-lg">
                             <FiEdit className="w-6 h-6 text-blue-600" />
                         </div>
-                        <h2 className="text-3xl font-bold text-gray-800">Blogify</h2>
+
+                        <h2 className="text-3xl font-bold text-gray-800">
+                            Blogify
+                        </h2>
                     </div>
 
-                    {/* Forget Password Card */}
+                    {/* Card */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{
+                            duration: 0.6,
+                            delay: 0.2,
+                        }}
                         className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
                     >
                         {/* Header Icon */}
@@ -95,9 +147,14 @@ export default function ForgetPassword() {
                         <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">
                             Forgot Password?
                         </h2>
-                        <p className="text-gray-600 text-center text-sm mb-10">
-                            No worries! Enter your email and we'll send you a reset OTP
+                        <p className="text-gray-600 text-center text-sm mb-6">
+                            Enter your email and we'll send you a reset OTP
                         </p>
+
+                        {/* Error Alert */}
+                        {loginFailed && (
+                            <ErrorAlert message={loginFailed} />
+                        )}
 
                         {/* Form */}
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -106,40 +163,47 @@ export default function ForgetPassword() {
                                 <label className="block text-sm font-medium text-gray-800">
                                     Email Address
                                 </label>
+
                                 <div className="relative group">
                                     <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-800 group-focus-within:text-blue-500 transition-colors duration-300">
                                         <FaEnvelope className="text-lg" />
                                     </span>
+
                                     <input
                                         type="email"
-                                        placeholder="you@example.com"
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        placeholder="you@example.com"
                                         className="w-full pl-11 pr-4 py-3.5 border border-gray-500 rounded-xl text-gray-800 
-                                        focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none 
-                                        transition-all duration-300 hover:border-gray-400"
-                                        required
+                                            focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none 
+                                            transition-all duration-300 hover:border-gray-400"
                                     />
                                 </div>
                             </div>
 
                             {/* Submit Button */}
                             <motion.button
+                                type="submit"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                type="submit"
                                 className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 
-                                rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 
-                                transition-all duration-300 shadow-lg shadow-blue-500/25 
-                                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                    rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 
+                                    transition-all duration-300 shadow-lg shadow-blue-500/25 
+                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
-                                Send Reset OTP
+                                {loader ? (
+                                    <ButtonLoader message="Sending OTP..." />
+                                ) : (
+                                    "Send Reset OTP"
+                                )}
                             </motion.button>
 
                             {/* Back to Login */}
                             <div className="text-center pt-4">
                                 <NavLink
-                                    to="/signIn"
+                                    to={routePath.login}
                                     className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 font-medium transition-colors duration-300 group"
                                 >
                                     <svg

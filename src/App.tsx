@@ -12,24 +12,25 @@ import OTPVerification from "./Pages/Auth/OTPPage";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 
 export default function App() {
-
-  const mode = useSelector(((state: RootState) => state.auth.mode))
+  const mode = useSelector((state: RootState) => state.auth.mode);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (authService.getAuthToken()) {
       navigate(routePath.home, { replace: true });
     }
-  }, [])
+  }, [navigate]); 
+
   return (
     <div className="h-screen w-full flex flex-col">
       <main>
-        {mode === 'login' && <SignIn />}
-        {mode === 'register' && <SignUp />}
-        {mode === 'forgotPassword' && <ForgetPassword />}
-        {mode === 'OTPpage' && <OTPVerification />}
-        {mode === 'resetPassword' && <ResetPassword />}
-        <Toaster position="top-right"
-          reverseOrder={false} />
+        {mode === "login" && <SignIn />}
+        {mode === "register" && <SignUp />}
+        {mode === "forgotPassword" && <ForgetPassword />}
+        {mode === "OTPpage" && <OTPVerification />}
+        {mode === "resetPassword" && <ResetPassword />}
+
+        <Toaster position="top-right" reverseOrder={false} />
       </main>
     </div>
   );

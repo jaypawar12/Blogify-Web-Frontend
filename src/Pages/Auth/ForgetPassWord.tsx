@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { FaEnvelope } from "react-icons/fa";
 import { FiArrowLeft, FiEdit } from "react-icons/fi";
 import { motion } from "framer-motion";
-
 import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import { ErrorAlert } from "../../Components/ErrorAlert";
-import { routePath } from "../../Routes/routes";
 import { setMode } from "../../Redux/Features/Auth/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -17,8 +14,6 @@ export default function ForgetPassword() {
     const [email, setEmail] = useState("");
     const [loader, setLoader] = useState(false);
     const [loginFailed, setLoginFailed] = useState("");
-
-    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,14 +37,12 @@ export default function ForgetPassword() {
             setLoginFailed("");
 
             const data = await authService.forgotPassword({ email });
+            console.log("Data: ", data);
+
 
             if (!data.error) {
                 toast.success(data.message);
-
-                navigate(routePath.otpVerify, {
-                    replace: true,
-                    state: { email },
-                });
+                dispatch(setMode("OTPpage"));
             } else {
                 setLoginFailed(data.message);
             }

@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { FiArrowLeft, FiShield, FiEdit } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
-import { routePath } from "../../Routes/routes";
 import { useDispatch } from "react-redux";
 import { setMode } from "../../Redux/Features/Auth/authSlice";
 
@@ -29,13 +28,12 @@ export default function OTPVerification() {
 
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-    const navigate = useNavigate();
     const location = useLocation();
 
     // === Validate state email ===
     useEffect(() => {
         if (!location.state?.email) {
-            navigate(routePath.login, { replace: true });
+            dispatch(setMode('login'));
             return;
         }
         setEmail(location.state.email);
@@ -114,14 +112,13 @@ export default function OTPVerification() {
             if (!data.error) {
                 toast.success(data.message);
 
-                navigate(routePath.resetPassword, {
-                    replace: true,
-                    state: { email },
-                });
+                dispatch(setMode('resetPassword'))
             } else {
                 setError(data.message);
             }
         } catch (err) {
+            console.log("Otp Send Error :", err);
+
             setError("Something went wrong. Try again.");
         }
 

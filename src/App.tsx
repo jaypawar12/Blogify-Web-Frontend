@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useNavigate, Outlet } from "react-router";
 import { authService } from "./Services/AuthService";
 import { routePath } from "./Routes/routes";
 import { useSelector } from "react-redux";
@@ -8,29 +8,39 @@ import type { RootState } from "./Redux/store";
 import SignIn from "./Pages/Auth/SignIn";
 import SignUp from "./Pages/Auth/SignUp";
 import ForgetPassword from "./Pages/Auth/ForgetPassWord";
-import OTPVerification from "./Pages/Auth/OTPPage";
 import ResetPassword from "./Pages/Auth/ResetPassword";
+import OTPVerification from "./Pages/Auth/OTPPage";
 
 export default function App() {
   const mode = useSelector((state: RootState) => state.auth.mode);
   const navigate = useNavigate();
+  const token = authService.getAuthToken();
 
   useEffect(() => {
-    if (authService.getAuthToken()) {
+    if (token) {
       navigate(routePath.home, { replace: true });
     }
-  }, [navigate]); 
+  }, [token, navigate]);
+
+  if (token) {
+    return (
+      <>
+        <Outlet />
+        <Toaster position="top-right" />
+      </>
+    );
+  }
 
   return (
     <div className="h-screen w-full flex flex-col">
       <main>
         {mode === "login" && <SignIn />}
         {mode === "register" && <SignUp />}
-        {mode === "forgotPassword" && <ForgetPassword />}
         {mode === "OTPpage" && <OTPVerification />}
+        {mode === "forgotPassword" && <ForgetPassword />}
         {mode === "resetPassword" && <ResetPassword />}
 
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster position="top-right" />
       </main>
     </div>
   );

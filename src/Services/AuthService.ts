@@ -1,6 +1,5 @@
 import axios from "axios";
 import type { LoginUserBody, RegisterUserBody } from "../Types/types";
-import toast from "react-hot-toast";
 
 class AuthService {
     authBaseURL = "https://blogify-web-backend.vercel.app/api";

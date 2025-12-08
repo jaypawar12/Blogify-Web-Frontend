@@ -8,7 +8,7 @@ export default function HomePage() {
             <h1 className='text-2xl'>HomePage</h1>
             <button onClick={() => {
                 localStorage.removeItem('token');
-                navigate('/login', { replace: true });
+                navigate('/', { replace: true });
             }}>Logout</button>
         </div>
     )

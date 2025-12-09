@@ -33,7 +33,7 @@ export default function OTPVerification() {
     // === Validate state email ===
     useEffect(() => {
         if (!location.state?.email) {
-            dispatch(setMode('login'));
+            dispatch(setMode('OTPpage'));
             return;
         }
         setEmail(location.state.email);

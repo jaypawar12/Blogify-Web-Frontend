@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import AuthLayout from "../../Components/Auth/AuthLayout";
 import { motion } from "framer-motion";
 
@@ -23,7 +23,7 @@ import { setMode } from "../../Redux/Features/Auth/authSlice";
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState<RegisterUserBody>({
     user_name: "",
@@ -96,7 +96,9 @@ export default function SignUp() {
     }
 
     setLoader(true);
+
     const data = await authService.registerUser(formData);
+
 
     if (!data.error) {
       toast.success(data.message);

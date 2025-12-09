@@ -2,7 +2,7 @@ import axios from "axios";
 import type { LoginUserBody, RegisterUserBody } from "../Types/types";
 
 class AuthService {
-    authBaseURL = "https://blogify-web-backend.vercel.app/api";
+    authBaseURL = "https://blogify-web-backend.onrender.com/api";
     authLogin = "/auth/login";
     authRegister = "/auth/register";
     authForgotPassword = "/auth/forgot_password";
@@ -14,8 +14,13 @@ class AuthService {
 
     async loginUser(payload: LoginUserBody) {
         try {
-            const res = await axios.post(this.authBaseURL + this.authLogin, payload);
+            const res = await axios.post(this.authBaseURL + this.authLogin, {
+                user_email: payload.email, // FIX
+                password: payload.password,
+            });
+
             return res.data;
+
         } catch (error: any) {
             return {
                 error: true,
@@ -24,12 +29,13 @@ class AuthService {
         }
     }
 
+
     async registerUser(payload: RegisterUserBody) {
         try {
             const formData = new FormData();
 
-            formData.append("name", payload.user_name);
-            formData.append("email", payload.user_email);
+            formData.append("user_name", payload.user_name);
+            formData.append("user_email", payload.user_email);
             formData.append("password", payload.password);
             formData.append("gender", payload.gender);
             formData.append("about", payload.about);
@@ -39,6 +45,7 @@ class AuthService {
             }
 
             const res = await axios.post(this.authBaseURL + this.authRegister, formData);
+
             return res.data;
         } catch (error: any) {
             return {

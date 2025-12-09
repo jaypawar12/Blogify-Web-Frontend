@@ -43,8 +43,11 @@ export default function SignIn() {
 
     setLoader(true);
     setLoginFailed("");
+    console.log("Login Data:", loginData);
 
     const data = await authService.loginUser(loginData);
+    console.log("Data:", data);
+
     setLoader(false);
 
     if (!data?.error) {
@@ -78,7 +81,7 @@ export default function SignIn() {
             <FaEnvelope className="absolute inset-y-0 left-3 my-auto text-gray-700 text-lg" />
             <input
               type="email"
-              name="email"
+              name="user_email"
               value={loginData.email}
               onChange={handleChange}
               placeholder="you@example.com"

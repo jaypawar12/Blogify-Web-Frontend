@@ -2,7 +2,8 @@ import axios from "axios";
 import type { LoginUserBody, RegisterUserBody } from "../Types/types";
 
 class AuthService {
-    authBaseURL = "https://blogify-web-backend.onrender.com/api";
+    // "https://blogify-web-backend.vercel.app/api"
+    authBaseURL = "http://localhost:8000";
     authLogin = "/auth/login";
     authRegister = "/auth/register";
     authForgotPassword = "/auth/forgot_password";
@@ -15,7 +16,7 @@ class AuthService {
     async loginUser(payload: LoginUserBody) {
         try {
             const res = await axios.post(this.authBaseURL + this.authLogin, {
-                user_email: payload.email, // FIX
+                user_email: payload.user_email,
                 password: payload.password,
             });
 
@@ -28,7 +29,6 @@ class AuthService {
             };
         }
     }
-
 
     async registerUser(payload: RegisterUserBody) {
         try {
@@ -58,6 +58,8 @@ class AuthService {
     async forgotPassword(payload: any) {
         try {
             const res = await axios.post(this.authBaseURL + this.authForgotPassword, payload);
+            console.log("res:", res);
+
             return res.data;
         } catch (error: any) {
             return {
@@ -69,6 +71,8 @@ class AuthService {
 
     async verifyOtp(payload: any) {
         try {
+            console.log("Payload", payload);
+
             const res = await axios.post(this.authBaseURL + this.authVerifyOtp, payload);
             return res.data;
         } catch (error: any) {

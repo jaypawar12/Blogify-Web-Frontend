@@ -35,8 +35,10 @@ export default function ForgetPassword() {
         try {
             setLoader(true);
             setLoginFailed("");
+            console.log("email:", email);
 
-            const data = await authService.forgotPassword({ email });
+
+            const data = await authService.forgotPassword({ user_email: email });
             console.log("Data: ", data);
 
 
@@ -167,6 +169,7 @@ export default function ForgetPassword() {
 
                                     <input
                                         type="email"
+                                        name="user_email"
                                         value={email}
                                         onChange={(e) =>
                                             setEmail(e.target.value)

@@ -22,7 +22,7 @@ export default function SignIn() {
   const [loader, setLoader] = useState(false);
   const [loginFailed, setLoginFailed] = useState("");
   const [loginData, setLoginData] = useState<LoginUserBody>({
-    email: "",
+    user_email: "",
     password: "",
   });
 
@@ -34,7 +34,7 @@ export default function SignIn() {
   const onSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!loginData.email.trim() || !loginData.password.trim()) {
+    if (!loginData.user_email.trim() || !loginData.password.trim()) {
       const msg = "Please fill all details.";
       setLoginFailed(msg);
       toast.error(msg);
@@ -82,7 +82,7 @@ export default function SignIn() {
             <input
               type="email"
               name="user_email"
-              value={loginData.email}
+              value={loginData.user_email}
               onChange={handleChange}
               placeholder="you@example.com"
               className="w-full pl-10 pr-4 py-3 border border-gray-500 rounded-lg

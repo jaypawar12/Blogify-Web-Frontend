@@ -24,11 +24,15 @@ export default function OTPVerification() {
     const [error, setError] = useState("");
 
     const [timer, setTimer] = useState(20);
-    const [email, setEmail] = useState("");
+    const [emails, setEmails] = useState("");
 
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
     const location = useLocation();
+
+    const state = location.state
+
+
 
     // === Validate state email ===
     useEffect(() => {
@@ -36,7 +40,8 @@ export default function OTPVerification() {
             dispatch(setMode('OTPpage'));
             return;
         }
-        setEmail(location.state.email);
+        setEmails(state.emails);
+
     }, []);
 
     // === Timer start ===
@@ -107,7 +112,7 @@ export default function OTPVerification() {
         setLoader(true);
 
         try {
-            const data = await authService.verifyOtp({ email, otp: otpString });
+            const data = await authService.verifyOtp({ emails, otp: otpString });
 
             if (!data.error) {
                 toast.success(data.message);
@@ -130,7 +135,7 @@ export default function OTPVerification() {
         try {
             setLoader(true);
 
-            const res = await authService.forgotPassword({ email });
+            const res = await authService.forgotPassword({ emails });
 
             if (!res.error) {
                 toast.success("OTP resent successfully!");
@@ -206,7 +211,7 @@ export default function OTPVerification() {
                         {/* Icon */}
                         <div className="flex justify-center mb-6">
                             <div className="p-4 bg-blue-50 rounded-2xl">
-                                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                                <div className="w-14 h-14 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
                                     <FiShield className="text-white w-7 h-7" />
                                 </div>
                             </div>

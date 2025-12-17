@@ -3,7 +3,7 @@ import type { LoginUserBody, RegisterUserBody } from "../Types/types";
 
 class AuthService {
     // "https://blogify-web-backend.vercel.app/api"
-    authBaseURL = "http://localhost:8000";
+    authBaseURL = "http://localhost:8000/api";
     authLogin = "/auth/login";
     authRegister = "/auth/register";
     authForgotPassword = "/auth/forgot_password";
@@ -15,6 +15,8 @@ class AuthService {
 
     async loginUser(payload: LoginUserBody) {
         try {
+            console.log("data", payload.user_email, payload.password);
+
             const res = await axios.post(this.authBaseURL + this.authLogin, {
                 user_email: payload.user_email,
                 password: payload.password,
@@ -57,6 +59,8 @@ class AuthService {
 
     async forgotPassword(payload: any) {
         try {
+            console.log("payload", payload);
+
             const res = await axios.post(this.authBaseURL + this.authForgotPassword, payload);
             console.log("res:", res);
 

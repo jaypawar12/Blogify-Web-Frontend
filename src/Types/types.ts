@@ -4,8 +4,8 @@ export interface LoginUserBody {
 }
 
 export interface RegisterUserBody {
-    name: string,
-    email: string,
+    user_name: string,
+    user_email: string,
     password: string,
     gender: string,
     about: string,
@@ -13,12 +13,12 @@ export interface RegisterUserBody {
 }
 
 export interface OTPVerifyPayLoad {
-    email: string,
+    user_email: string,
     OTP: string
 }
 
 export interface ChangePasswordPayload {
-    email: string,
+    user_email: string,
     newPassword: string
 }
 
@@ -46,7 +46,7 @@ export interface Blog {
 
 export interface Author {
     _id: string;
-    name: string;
+    user_name: string;
     gender: string;
     profile_image: string;
 }
@@ -60,8 +60,8 @@ export interface Comment {
 
 export interface User {
     _id: string,
-    name: string,
-    email: string,
+    user_name: string,
+    user_email: string,
     gender: string,
     about: string,
     profile_image: string,

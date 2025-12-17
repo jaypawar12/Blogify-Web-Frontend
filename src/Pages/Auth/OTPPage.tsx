@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router";
 import { FiArrowLeft, FiShield, FiEdit } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "../../Redux/Features/Auth/authSlice";
+import type { RootState } from "../../Redux/store";
 
 // Alerts
 const ErrorAlert = ({ message }: { message: string }) => (
@@ -24,25 +24,13 @@ export default function OTPVerification() {
     const [error, setError] = useState("");
 
     const [timer, setTimer] = useState(20);
-    const [emails, setEmails] = useState("");
 
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-    const location = useLocation();
+    const email = useSelector((state: RootState) => state.auth.email)
 
-    const state = location.state
+    console.log(email);
 
-
-
-    // === Validate state email ===
-    useEffect(() => {
-        if (!location.state?.email) {
-            dispatch(setMode('OTPpage'));
-            return;
-        }
-        setEmails(state.emails);
-
-    }, []);
 
     // === Timer start ===
     useEffect(() => {
@@ -112,7 +100,10 @@ export default function OTPVerification() {
         setLoader(true);
 
         try {
-            const data = await authService.verifyOtp({ emails, otp: otpString });
+            const data = await authService.verifyOtp({ user_email: email, OTP: otpString });
+
+            console.log(data);
+
 
             if (!data.error) {
                 toast.success(data.message);
@@ -135,7 +126,7 @@ export default function OTPVerification() {
         try {
             setLoader(true);
 
-            const res = await authService.forgotPassword({ emails });
+            const res = await authService.forgotPassword({ email });
 
             if (!res.error) {
                 toast.success("OTP resent successfully!");

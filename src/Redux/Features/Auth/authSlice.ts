@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
-    mode: 'login' | 'register' | 'forgotPassword' | 'OTPpage' | 'resetPassword'
+    mode: 'login' | 'register' | 'forgotPassword' | 'OTPpage' | 'resetPassword',
+    email: string
 }
 
 const initialState: AuthState = {
-    mode: 'login'
+    mode: 'login',
+    email: ""
 }
 
 export const authSlice = createSlice({
@@ -14,9 +16,13 @@ export const authSlice = createSlice({
     reducers: {
         setMode: (state, action) => {
             state.mode = action.payload;
-        }
+        },
+
+        setAuthEmail: (state, action) => {
+            state.email = action.payload;
+        },
     }
 });
 
-export const { setMode } = authSlice.actions;
+export const { setMode, setAuthEmail } = authSlice.actions;
 export default authSlice.reducer;

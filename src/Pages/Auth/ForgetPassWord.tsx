@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import { ErrorAlert } from "../../Components/ErrorAlert";
-import { setMode } from "../../Redux/Features/Auth/authSlice";
+import { setMode, setAuthEmail } from "../../Redux/Features/Auth/authSlice";
 import { useDispatch } from "react-redux";
 
 export default function ForgetPassword() {
@@ -44,6 +44,7 @@ export default function ForgetPassword() {
 
             if (!data.error) {
                 toast.success(data.message);
+                dispatch(setAuthEmail(email));
                 dispatch(setMode("OTPpage"));
             } else {
                 setLoginFailed(data.message);

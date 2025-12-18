@@ -104,7 +104,7 @@ export default function AuthLayout({ children, title }: any) {
                     </div>
 
                     {/* ---------- TITLE ---------- */}
-                    <h3 className="text-center text-xl font-semibold mb-6">{title}</h3>
+                    <h3 className="text-center text-xl font-semibold mb-3">{title}</h3>
 
                     {/* ---------- CONTENT ---------- */}
                     {children}

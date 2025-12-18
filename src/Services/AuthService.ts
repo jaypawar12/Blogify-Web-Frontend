@@ -8,6 +8,7 @@ class AuthService {
     authRegister = "/auth/register";
     authForgotPassword = "/auth/forgot_password";
     authVerifyOtp = "/auth/verify_otp";
+    authResetPassword = "/auth/reset_password";
 
     getAuthToken() {
         return localStorage.getItem("token");
@@ -86,6 +87,7 @@ class AuthService {
             };
         }
     }
+
 }
 
 export const authService = new AuthService();

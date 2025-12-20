@@ -225,7 +225,9 @@ export default function SignUp() {
             {/* Full Name */}
             <InputField
               label="Full Name"
-              icon={<FiUser className="text-gray-500" />}
+              icon={<FiUser className="text-gray-500 absolute left-0 top-1/2 -translate-y-1/2 
+               text-gray-500 text-lg 
+               z-10 pointer-events-none group-focus-within:text-blue-600" />}
               name="user_name"
               value={formData.user_name}
               onChange={handleChange}
@@ -237,7 +239,9 @@ export default function SignUp() {
             {/* Email */}
             <InputField
               label="Email Address"
-              icon={<FiMail className="text-gray-500" />}
+              icon={<FiMail className="text-gray-500 absolute left-0 top-1/2 -translate-y-1/2 
+               text-gray-500 text-lg 
+               z-10 pointer-events-none group-focus-within:text-blue-600" />}
               name="user_email"
               type="email"
               value={formData.user_email}
@@ -259,7 +263,9 @@ export default function SignUp() {
             </label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-l-lg opacity-0 group-focus-within:opacity-100 transition-opacity" />
-              <FiLock className="absolute inset-y-0 left-3 my-auto text-gray-500 text-lg transition-colors group-focus-within:text-blue-600" />
+              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 
+               text-gray-500 text-lg 
+               z-10 pointer-events-none group-focus-within:text-blue-600" />
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -272,7 +278,7 @@ export default function SignUp() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-3 my-auto text-gray-500 hover:text-blue-600 transition-colors p-1.5 rounded-md hover:bg-blue-50"
+                className="absolute inset-y-0 right-3 my-auto text-gray-500 transition-colors rounded-md hover:bg-blue-50 p-1.5"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -296,6 +302,7 @@ export default function SignUp() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+
             transition={{ duration: 0.3, delay: 0.5 }}
             className="space-y-3"
           >
@@ -308,7 +315,7 @@ export default function SignUp() {
                   key={gender}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`flex items-center justify-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 ${formData.gender === gender
+                  className={`flex items-center justify-center gap-3 p-2 rounded-xl border-2 cursor-pointer transition-all duration-300 ${formData.gender === gender
                     ? "border-blue-500 bg-blue-50 text-blue-700"
                     : "border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700"
                     }`}

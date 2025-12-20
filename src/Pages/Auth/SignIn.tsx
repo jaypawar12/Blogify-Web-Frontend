@@ -115,7 +115,7 @@ export default function SignIn() {
               <FaEnvelope
                 className="absolute left-3 top-1/2 -translate-y-1/2 
                text-gray-500 text-lg 
-               z-10 pointer-events-none"
+               z-10 pointer-events-none group-focus-within:text-blue-600"
               />
 
               <input

@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { LoginUserBody, RegisterUserBody } from "../Types/types";
+import type { ChangePasswordPayload, LoginUserBody, RegisterUserBody } from "../Types/types";
 
 class AuthService {
     // "https://blogify-web-backend.vercel.app/api"
@@ -88,6 +88,19 @@ class AuthService {
         }
     }
 
-}
+    async changePassword(payload: ChangePasswordPayload) {
+        try {
+            console.log("Payload", payload);
+            const res = axios.post(this.authBaseURL + this.authResetPassword, payload);
+            return res.then(response => response.data);
+        } catch (error: any) {
+            return {
+                error: true,
+                message: error.response?.data?.message || "Password reset failed.",
+            };
+        }
 
+    }
+
+}
 export const authService = new AuthService();

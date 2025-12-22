@@ -324,7 +324,7 @@ export default function SignIn() {
           <p className="text-gray-700">
             Don't have an account?{' '}
             <button
-              onClick={() => dispatch(setMode("signup"))}
+              onClick={() => dispatch(setMode("register"))}
               className="text-blue-600 hover:text-blue-700 font-semibold 
             transition-colors relative after:absolute after:bottom-0 after:left-0 
             after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all"

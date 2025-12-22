@@ -263,9 +263,7 @@ export default function SignUp() {
             </label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-l-lg opacity-0 group-focus-within:opacity-100 transition-opacity" />
-              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 
-               text-gray-500 text-lg 
-               z-10 pointer-events-none group-focus-within:text-blue-600" />
+              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-lg z-10 pointer-events-none group-focus-within:text-blue-600" />
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -278,7 +276,10 @@ export default function SignUp() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-3 my-auto text-gray-500 transition-colors rounded-md hover:bg-blue-50 p-1.5"
+                className="absolute right-3 top-1/2 -translate-y-1/2
+               text-gray-400 hover:text-blue-600
+               z-10 transition-colors
+               p-1.5 rounded-md hover:bg-blue-50"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}

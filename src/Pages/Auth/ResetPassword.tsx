@@ -26,7 +26,7 @@ export default function ResetPassword() {
         newPassword: "",
         confirmPassword: "",
     });
-    console.log("Email:", email);
+    // console.log("Email:", email);
 
     if (authService.getAuthToken()) {
         return navigate(routePath.home, { replace: true });;
@@ -61,11 +61,13 @@ export default function ResetPassword() {
             };
 
             const data = await authService.changePassword(payload);
+            // console.log("Data:", data);
 
             if (!data.error) {
                 toast.success(data.message);
                 dispatch(setMode("login"));
             } else {
+                toast.error(data.message);
                 setError(data.message);
             }
 

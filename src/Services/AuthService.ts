@@ -8,7 +8,7 @@ class AuthService {
     authRegister = "/auth/register";
     authForgotPassword = "/auth/forgot_password";
     authVerifyOtp = "/auth/verify_otp";
-    authResetPassword = "/auth/reset_password";
+    authResetPassword = "/auth/change_password";
 
     getAuthToken() {
         return localStorage.getItem("token");
@@ -48,7 +48,6 @@ class AuthService {
             }
 
             const res = await axios.post(this.authBaseURL + this.authRegister, formData);
-
             return res.data;
         } catch (error: any) {
             return {
@@ -60,11 +59,7 @@ class AuthService {
 
     async forgotPassword(payload: any) {
         try {
-            console.log("payload", payload);
-
             const res = await axios.post(this.authBaseURL + this.authForgotPassword, payload);
-            console.log("res:", res);
-
             return res.data;
         } catch (error: any) {
             return {
@@ -76,8 +71,6 @@ class AuthService {
 
     async verifyOtp(payload: any) {
         try {
-            console.log("Payload", payload);
-
             const res = await axios.post(this.authBaseURL + this.authVerifyOtp, payload);
             return res.data;
         } catch (error: any) {
@@ -90,9 +83,10 @@ class AuthService {
 
     async changePassword(payload: ChangePasswordPayload) {
         try {
-            console.log("Payload", payload);
+            // console.log("Payload", payload);
             const res = axios.post(this.authBaseURL + this.authResetPassword, payload);
-            return res.then(response => response.data);
+            const data = await res.then(response => response.data);
+            return data;
         } catch (error: any) {
             return {
                 error: true,

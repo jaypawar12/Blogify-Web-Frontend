@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './Features/Auth/authSlice'
-// import { blocReducer } from './Features/Blog/blogSlice'
+import blocReducer from './Features/Blog/blogSlice'
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
-        // blog: blocReducer
+        blog: blocReducer
     },
 })
 

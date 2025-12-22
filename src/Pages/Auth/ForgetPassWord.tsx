@@ -35,11 +35,11 @@ export default function ForgetPassword() {
         try {
             setLoader(true);
             setLoginFailed("");
-            console.log("email:", email);
+            // console.log("email:", email);
 
 
             const data = await authService.forgotPassword({ user_email: email });
-            console.log("Data: ", data);
+            // console.log("Data: ", data);
 
 
             if (!data.error) {

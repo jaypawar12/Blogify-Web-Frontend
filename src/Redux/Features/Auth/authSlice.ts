@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { authService } from "../../../Services/AuthService";
 
 interface AuthState {
-    mode: 'login' | 'register' | 'forgotPassword' | 'OTPpage' | 'resetPassword',
+    mode: 'login' | 'register' | 'forgotPassword' | 'OTPpage' | 'resetPassword' | null,
     email: string
 }
 
 const initialState: AuthState = {
-    mode: 'login',
+    mode: authService.getAuthToken() ? null : 'login',
     email: ""
 }
 

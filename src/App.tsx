@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useNavigate, Outlet } from "react-router";
 import { authService } from "./Services/AuthService";
@@ -14,34 +14,41 @@ import OTPVerification from "./Pages/Auth/OTPPage";
 export default function App() {
   const mode = useSelector((state: RootState) => state.auth.mode);
   const navigate = useNavigate();
-  const token = authService.getAuthToken();
+
+  const [token, setToken] = useState<string | null>(null);
+
 
   useEffect(() => {
+    const authToken = authService.getAuthToken();
+    setToken(authToken);
     if (token) {
       navigate(routePath.home, { replace: true });
     }
   }, [token, navigate]);
 
   if (token) {
+
     return (
       <>
         <Outlet />
         <Toaster position="top-right" />
       </>
     );
+  } else {
+    return (
+      <div className="h-screen w-full flex flex-col">
+        <main>
+          {mode === "login" && <SignIn />}
+          {mode === "register" && <SignUp />}
+          {mode === "OTPpage" && <OTPVerification />}
+          {mode === "forgotPassword" && <ForgetPassword />}
+          {mode === "resetPassword" && <ResetPassword />}
+
+          <Toaster position="top-right" />
+        </main>
+      </div>
+    );
   }
 
-  return (
-    <div className="h-screen w-full flex flex-col">
-      <main>
-        {mode === "login" && <SignIn />}
-        {mode === "register" && <SignUp />}
-        {mode === "OTPpage" && <OTPVerification />}
-        {mode === "forgotPassword" && <ForgetPassword />}
-        {mode === "resetPassword" && <ResetPassword />}
 
-        <Toaster position="top-right" />
-      </main>
-    </div>
-  );
 }

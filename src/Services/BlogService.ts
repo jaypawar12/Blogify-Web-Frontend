@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { authService } from "./AuthService";
 
 class BlogService {
-    baseURL = "https://blog-web-backend-1-dkyg.onrender.com/api";
+    baseURL = "http://localhost:8000/api";
     blog = "/blog/";
     userProfile = "/user/profile";
 

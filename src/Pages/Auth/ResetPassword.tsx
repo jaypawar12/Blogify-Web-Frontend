@@ -1,6 +1,6 @@
 import { FiArrowLeft, FiLock, FiEdit, FiEye, FiEyeOff } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
@@ -9,12 +9,13 @@ import { setMode } from "../../Redux/Features/Auth/authSlice";
 import { authService } from "../../Services/AuthService";
 import { routePath } from "../../Routes/routes";
 import type { ChangePasswordPayload } from "../../Types/types";
+import type { RootState } from "../../Redux/store";
 
 export default function ResetPassword() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const email = useSelector((state: any) => state.auth.email)
+    const email = useSelector((state: RootState) => state.auth.email)
 
     const [showPass, setShowPass] = useState(false);
     const [showCPass, setShowCPass] = useState(false);

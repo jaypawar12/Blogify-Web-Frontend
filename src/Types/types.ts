@@ -39,6 +39,7 @@ export interface Blog {
     category: string;
     tags: string[];
     likes: number;
+    views?: number;
     create_at: string;
     update_at: string;
     comment: Comment[];

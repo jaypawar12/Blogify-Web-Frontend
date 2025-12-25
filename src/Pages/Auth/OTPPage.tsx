@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { setMode } from "../../Redux/Features/Auth/authSlice";
 import type { RootState } from "../../Redux/store";
+import { useNavigate } from "react-router";
+import { routePath } from "../../Routes/routes";
 
 // Alerts
 const ErrorAlert = ({ message }: { message: string }) => (
@@ -18,6 +19,7 @@ const ErrorAlert = ({ message }: { message: string }) => (
 );
 
 export default function OTPVerification() {
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
     const [loader, setLoader] = useState(false);
@@ -107,8 +109,7 @@ export default function OTPVerification() {
 
             if (!data.error) {
                 toast.success(data.message);
-
-                dispatch(setMode('resetPassword'))
+                navigate(routePath.resetPassword);
             } else {
                 setError(data.message);
             }
@@ -269,7 +270,7 @@ export default function OTPVerification() {
                         {/* Back to Login */}
                         <div className="text-center pt-4">
                             <button
-                                onClick={() => dispatch(setMode("login"))}
+                                onClick={() => navigate(routePath.login)}
                                 className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 font-medium group"
                             >
                                 <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />

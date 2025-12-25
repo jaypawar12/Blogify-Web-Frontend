@@ -20,9 +20,11 @@ import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import type { RegisterUserBody } from "../../Types/types";
 import { useDispatch } from "react-redux";
-import { setMode } from "../../Redux/Features/Auth/authSlice";
+import { useNavigate } from "react-router";
+import { routePath } from "../../Routes/routes";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState<RegisterUserBody>({
@@ -43,7 +45,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (authService.getAuthToken()) {
-      dispatch(setMode("login"));
+      navigate(routePath.home, { replace: true });
     }
   }, []);
 
@@ -137,7 +139,7 @@ export default function SignUp() {
     if (!data.error) {
       toast.success("Account created successfully! 🎉");
       setTimeout(() => {
-        dispatch(setMode("login"));
+        navigate(routePath.home, { replace: true });
       }, 1500);
     } else {
       toast.error(data.message || "Registration failed. Please try again.");
@@ -449,7 +451,7 @@ export default function SignUp() {
             <p className="text-gray-700">
               Already have an account?{" "}
               <button
-                onClick={() => dispatch(setMode("login"))}
+                onClick={() => navigate(routePath.login)}
                 className="text-blue-600 hover:text-blue-700 font-semibold 
                   transition-colors relative after:absolute after:bottom-0 after:left-0 
                   after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all"

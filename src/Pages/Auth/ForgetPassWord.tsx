@@ -6,10 +6,13 @@ import toast from "react-hot-toast";
 import { authService } from "../../Services/AuthService";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import { ErrorAlert } from "../../Components/ErrorAlert";
-import { setMode, setAuthEmail } from "../../Redux/Features/Auth/authSlice";
+import { setAuthEmail } from "../../Redux/Features/Auth/authSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { routePath } from "../../Routes/routes";
 
 export default function ForgetPassword() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [loader, setLoader] = useState(false);
@@ -45,7 +48,7 @@ export default function ForgetPassword() {
             if (!data.error) {
                 toast.success(data.message);
                 dispatch(setAuthEmail(email));
-                dispatch(setMode("OTPpage"));
+                navigate(routePath.OTPVerification);
             } else {
                 setLoginFailed(data.message);
             }
@@ -203,7 +206,7 @@ export default function ForgetPassword() {
                             {/* Back to Login */}
                             <div className="text-center pt-4">
                                 <button
-                                    onClick={() => dispatch(setMode("login"))}
+                                    onClick={() => navigate(routePath.login)}
                                     className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 font-medium group cursor-pointer"
                                 >
                                     <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />

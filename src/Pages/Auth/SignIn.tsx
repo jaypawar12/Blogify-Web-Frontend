@@ -11,11 +11,8 @@ import { routePath } from "../../Routes/routes";
 import { ButtonLoader } from "../../Components/ButtonLoader";
 import { ErrorAlert } from "../../Components/ErrorAlert";
 import type { LoginUserBody } from "../../Types/types";
-import { useDispatch } from "react-redux";
-import { setMode } from "../../Redux/Features/Auth/authSlice";
 
 export default function SignIn() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showPass, setShowPass] = useState(false);
@@ -54,8 +51,8 @@ export default function SignIn() {
       toast.success(data.message || "Login successful.");
 
       localStorage.setItem("token", data.result.token);
-
       navigate(routePath.home, { replace: true });
+
     } else {
       setLoginFailed(data.message || "Invalid credentials.");
     }
@@ -221,7 +218,7 @@ export default function SignIn() {
             </label>
 
             <button
-              onClick={() => dispatch(setMode("forgotPassword"))}
+              onClick={() => navigate(routePath.forgotPassword)}
               className="text-sm text-blue-600 hover:text-blue-700 font-medium 
             transition-colors relative after:absolute after:bottom-0 after:left-0 
             after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all"
@@ -324,7 +321,7 @@ export default function SignIn() {
           <p className="text-gray-700">
             Don't have an account?{' '}
             <button
-              onClick={() => dispatch(setMode("register"))}
+              onClick={() => navigate(routePath.register)}
               className="text-blue-600 hover:text-blue-700 font-semibold 
             transition-colors relative after:absolute after:bottom-0 after:left-0 
             after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all"

@@ -1,11 +1,10 @@
 import { FiArrowLeft, FiLock, FiEdit, FiEye, FiEyeOff } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
-import { setMode } from "../../Redux/Features/Auth/authSlice";
 import { authService } from "../../Services/AuthService";
 import { routePath } from "../../Routes/routes";
 import type { ChangePasswordPayload } from "../../Types/types";
@@ -13,7 +12,6 @@ import type { RootState } from "../../Redux/store";
 
 export default function ResetPassword() {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const email = useSelector((state: RootState) => state.auth.email)
 
@@ -33,7 +31,7 @@ export default function ResetPassword() {
         return navigate(routePath.home, { replace: true });;
     }
     if (!email) {
-        dispatch(setMode("forgotPassword"));
+        return navigate(routePath.forgotPassword, { replace: true });;
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +64,7 @@ export default function ResetPassword() {
 
             if (!data.error) {
                 toast.success(data.message);
-                dispatch(setMode("login"));
+                navigate(routePath.login, { replace: true });
             } else {
                 toast.error(data.message);
                 setError(data.message);
@@ -206,7 +204,7 @@ export default function ResetPassword() {
                         {/* BACK */}
                         <div className="text-center pt-4">
                             <button
-                                onClick={() => dispatch(setMode("login"))}
+                                onClick={() => navigate(routePath.login)}
                                 className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600"
                             >
                                 <FiArrowLeft className="mr-2" />

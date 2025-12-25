@@ -74,7 +74,7 @@ export default function HomePage() {
             if (!res.error) {
                 dispatch(setCurrentUser(res.result));
             }
-        } catch {
+        } catch {   
             toast.error("Failed to load profile");
         }
     };

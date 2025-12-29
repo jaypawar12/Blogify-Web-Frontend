@@ -19,6 +19,7 @@ import {
     FaEdit,
 } from "react-icons/fa";
 import type { RootState } from "../Redux/store";
+import { routePath } from "../Routes/routes";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -61,7 +62,7 @@ export default function Header() {
                 <div className="flex items-center justify-between h-20">
                     {/* LOGO */}
                     <motion.div
-                        onClick={() => navigate("/home")}
+                        onClick={() => navigate(routePath.home)}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="flex items-center gap-3 cursor-pointer group"
@@ -85,26 +86,24 @@ export default function Header() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={() => navigate("/home")}
-                            className={`px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
-                                isActive("/home")
-                                    ? 'bg-blue-50 text-blue-600'
-                                    : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            onClick={() => navigate(routePath.home)}
+                            className={`px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${isActive("/")
+                                ? 'bg-blue-50 text-blue-600'
+                                : 'text-gray-700 hover:bg-gray-100'
+                                }`}
                         >
                             <FaHome className="inline mr-2" />
                             Home
                         </motion.button>
-                        
+
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => navigate("/blogs")}
-                            className={`px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
-                                isActive("/blogs")
-                                    ? 'bg-blue-50 text-blue-600'
-                                    : 'text-gray-700 hover:bg-gray-100'
-                            }`}
+                            className={`px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${isActive("/blogs")
+                                ? 'bg-blue-50 text-blue-600'
+                                : 'text-gray-700 hover:bg-gray-100'
+                                }`}
                         >
                             <FaBookOpen className="inline mr-2" />
                             Explore
@@ -115,7 +114,7 @@ export default function Header() {
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => navigate("/create")}
+                                    onClick={() => navigate(routePath.addBlog)}
                                     className="ml-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2"
                                 >
                                     <FaPenNib />
@@ -290,11 +289,10 @@ export default function Header() {
                                         navigate("/home");
                                         setMenuOpen(false);
                                     }}
-                                    className={`px-4 py-3 rounded-lg font-semibold text-left transition-colors ${
-                                        isActive("/home")
-                                            ? 'bg-blue-50 text-blue-600'
-                                            : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
+                                    className={`px-4 py-3 rounded-lg font-semibold text-left transition-colors ${isActive("/home")
+                                        ? 'bg-blue-50 text-blue-600'
+                                        : 'text-gray-700 hover:bg-gray-100'
+                                        }`}
                                 >
                                     <FaHome className="inline mr-3" />
                                     Home
@@ -304,11 +302,10 @@ export default function Header() {
                                         navigate("/blogs");
                                         setMenuOpen(false);
                                     }}
-                                    className={`px-4 py-3 rounded-lg font-semibold text-left transition-colors ${
-                                        isActive("/blogs")
-                                            ? 'bg-blue-50 text-blue-600'
-                                            : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
+                                    className={`px-4 py-3 rounded-lg font-semibold text-left transition-colors ${isActive("/blogs")
+                                        ? 'bg-blue-50 text-blue-600'
+                                        : 'text-gray-700 hover:bg-gray-100'
+                                        }`}
                                 >
                                     <FaBookOpen className="inline mr-3" />
                                     Explore

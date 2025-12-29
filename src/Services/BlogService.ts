@@ -43,6 +43,20 @@ class BlogService {
             return { error: true };
         }
     }
+    async addBlog(formData: FormData) {
+        try {
+            const res = await axios.post(
+                this.baseURL + this.blog,
+                formData,
+                this.blogHeader()
+            );
+            return res.data;
+        } catch (err: any) {
+            console.error("Add Blog Error:", err);
+            toast.error(err?.response?.data?.message || "Something went wrong!");
+            return { error: true };
+        }
+    }
 
     async fetchUserProfile() {
         try {

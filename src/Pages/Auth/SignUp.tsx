@@ -139,7 +139,7 @@ export default function SignUp() {
     if (!data.error) {
       toast.success("Account created successfully! 🎉");
       setTimeout(() => {
-        navigate(routePath.home, { replace: true });
+        navigate(routePath.login, { replace: true });
       }, 1500);
     } else {
       toast.error(data.message || "Registration failed. Please try again.");

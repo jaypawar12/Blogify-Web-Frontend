@@ -66,6 +66,9 @@ export interface User {
     gender: string,
     about: string,
     profile_image: string,
+    create_at: string;
+    update_at: string;
+    password: string;
 }
 
 export interface AddBlog {

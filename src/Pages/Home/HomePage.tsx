@@ -38,7 +38,8 @@ export default function HomePage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { allBlogs, user } = useSelector((state: RootState) => state.blog);
+    const allBlogs = useSelector((state: RootState) => state.blog.allBlogs);
+    const user = useSelector((state: RootState) => state.blog.user);
 
     const [loading, setLoading] = useState(false);
     const [viewMode, setViewMode] = useState<ViewMode>("grid");
@@ -46,6 +47,12 @@ export default function HomePage() {
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/");
+        } else {
+            navigate("/login");
+        }
         fetchBlogs();
         fetchProfile();
     }, []);
@@ -74,7 +81,7 @@ export default function HomePage() {
             if (!res.error) {
                 dispatch(setCurrentUser(res.result));
             }
-        } catch {   
+        } catch {
             toast.error("Failed to load profile");
         }
     };
@@ -146,15 +153,15 @@ export default function HomePage() {
                     <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
                     <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
                 </div>
-                
+
                 {/* Grid Pattern Overlay */}
-                <div 
+                <div
                     className="absolute inset-0 opacity-10"
                     style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
                     }}
                 ></div>
-                
+
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -181,7 +188,7 @@ export default function HomePage() {
                                 Amazing Stories
                             </span>
                         </h1>
-                        
+
                         <p className="text-xl md:text-2xl text-blue-100/90 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
                             Dive into insightful articles, share your thoughts, and connect with passionate writers from around the world
                         </p>
@@ -369,11 +376,10 @@ export default function HomePage() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.1 + index * 0.03 }}
                                         onClick={() => setSelectedCategory(category)}
-                                        className={`w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-sm ${
-                                            selectedCategory === category
-                                                ? 'bg-blue-600 text-white font-semibold shadow-md'
-                                                : 'text-gray-700 hover:bg-gray-50'
-                                        }`}
+                                        className={`w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-sm ${selectedCategory === category
+                                            ? 'bg-blue-600 text-white font-semibold shadow-md'
+                                            : 'text-gray-700 hover:bg-gray-50'
+                                            }`}
                                     >
                                         <span className="capitalize flex items-center justify-between">
                                             {category === 'all' ? 'All Categories' : category}
@@ -451,21 +457,19 @@ export default function HomePage() {
                                 <div className="flex bg-gray-100 rounded-lg p-1">
                                     <button
                                         onClick={() => setViewMode("grid")}
-                                        className={`p-2.5 rounded-md transition-all duration-200 ${
-                                            viewMode === "grid"
-                                                ? "bg-white shadow-sm text-blue-600"
-                                                : "text-gray-500 hover:text-gray-700"
-                                        }`}
+                                        className={`p-2.5 rounded-md transition-all duration-200 ${viewMode === "grid"
+                                            ? "bg-white shadow-sm text-blue-600"
+                                            : "text-gray-500 hover:text-gray-700"
+                                            }`}
                                     >
                                         <FaThLarge className="text-base" />
                                     </button>
                                     <button
                                         onClick={() => setViewMode("list")}
-                                        className={`p-2.5 rounded-md transition-all duration-200 ${
-                                            viewMode === "list"
-                                                ? "bg-white shadow-sm text-blue-600"
-                                                : "text-gray-500 hover:text-gray-700"
-                                        }`}
+                                        className={`p-2.5 rounded-md transition-all duration-200 ${viewMode === "list"
+                                            ? "bg-white shadow-sm text-blue-600"
+                                            : "text-gray-500 hover:text-gray-700"
+                                            }`}
                                     >
                                         <FaList className="text-base" />
                                     </button>
@@ -499,7 +503,7 @@ export default function HomePage() {
                                                 }}
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                            
+
                                             {/* Category Badge */}
                                             {blog.category && (
                                                 <div className="absolute top-4 left-4">
@@ -508,7 +512,7 @@ export default function HomePage() {
                                                     </span>
                                                 </div>
                                             )}
-                                            
+
                                             {/* Action Buttons */}
                                             <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                 <button className="p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg hover:bg-white transition-colors">
@@ -553,7 +557,7 @@ export default function HomePage() {
                                             <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
                                                 {blog.title}
                                             </h3>
-                                            
+
                                             {/* Subtitle */}
                                             <p className="text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed">
                                                 {blog.subtitle}
@@ -634,7 +638,7 @@ export default function HomePage() {
                                                     )}
                                                 </div>
                                             </div>
-                                            
+
                                             {/* Content */}
                                             <div className="flex-1 flex flex-col justify-between">
                                                 <div>
@@ -669,7 +673,7 @@ export default function HomePage() {
                                                     <h3 className="font-bold text-2xl text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300 leading-tight line-clamp-2">
                                                         {blog.title}
                                                     </h3>
-                                                    
+
                                                     {/* Subtitle */}
                                                     <p className="text-gray-600 mb-4 leading-relaxed line-clamp-2">
                                                         {blog.subtitle}

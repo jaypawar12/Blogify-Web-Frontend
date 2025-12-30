@@ -7,7 +7,7 @@ import ForgetPassword from "../Pages/Auth/ForgetPassWord";
 import OTPVerification from "../Pages/Auth/OTPPage";
 import ResetPassword from "../Pages/Auth/ResetPassword";
 import ProfilePage from "../Pages/Profile/ProfilePage";
-import CreateBlogPage from "../Pages/Blog/AddBlog";
+import AddBlogPage from "../Pages/Blog/AddBlog";
 
 export const routePath = {
     login: '/login',
@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: routePath.addBlog,
-                Component: CreateBlogPage,
+                Component: AddBlogPage,
             }
         ],
     },

@@ -169,7 +169,7 @@ export default function ProfilePage() {
                 {/* PROFILE HEADER */}
                 <div className="relative mb-10">
                     {/* COVER PHOTO */}
-                    <div className="h-64 rounded-2xl overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 relative">
+                    <div className="h-64 rounded-2xl overflow-hidden bg-gradient-to-r from-blue-500 to-blue-800 relative">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 
                         {/* PROFILE IMAGE */}
@@ -182,7 +182,7 @@ export default function ProfilePage() {
                                         alt={user.user_name}
                                     />
                                 ) : (
-                                    <div className="w-32 h-32 rounded-full border-4 border-white shadow-2xl bg-gradient-to-r from-blue-100 to-indigo-100 flex items-center justify-center">
+                                    <div className="w-32 h-32 rounded-full border-4 border-white shadow-2xl bg-gradient-to-r from-blue-100 to-blue-800 flex items-center justify-center">
                                         <FaUserCircle className="w-24 h-24 text-blue-600" />
                                     </div>
                                 )}
@@ -249,7 +249,7 @@ export default function ProfilePage() {
                         <div className="flex justify-center">
                             <button
                                 onClick={() => navigate(routePath.addBlog)}
-                                className="mt-1 lg:mt-0 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg"
+                                className="mt-1 lg:mt-0 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-5 py-2 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
                             >
                                 <FaPenNib />
                                 Write New Blog
@@ -406,7 +406,7 @@ export default function ProfilePage() {
                         </div>
 
                         {/* STATS */}
-                        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 text-white">
+                        <div className="bg-gradient-to-r from-blue-500 to-blue-800 rounded-2xl p-6 text-white">
                             <h3 className="font-semibold mb-6 flex items-center gap-2">
                                 <FaChartLine />
                                 Your Stats
@@ -566,7 +566,7 @@ export default function ProfilePage() {
                                             </p>
                                             <button
                                                 onClick={() => navigate("/create")}
-                                                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all"
+                                                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all"
                                             >
                                                 <FaPenNib />
                                                 Create Your First Blog

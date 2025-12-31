@@ -20,6 +20,7 @@ import {
 } from "react-icons/fa";
 import type { RootState } from "../Redux/store";
 import { routePath } from "../Routes/routes";
+import { FiEdit } from "react-icons/fi";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -68,13 +69,13 @@ export default function Header() {
                         className="flex items-center gap-3 cursor-pointer group"
                     >
                         <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                            <div className="relative p-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg">
-                                <FaPenNib className="text-white text-lg" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-600 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                            <div className="relative p-2.5 bg-gradient-to-r from-blue-600 to-blue-600 rounded-xl shadow-md">
+                                <FiEdit className="w-6 h-6 text-white" />
                             </div>
                         </div>
                         <div>
-                            <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                            <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
                                 Blogify
                             </span>
                             <p className="text-xs text-gray-500 font-medium">Share your thoughts</p>
@@ -115,7 +116,7 @@ export default function Header() {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => navigate(routePath.addBlog)}
-                                    className="ml-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2"
+                                    className="ml-2 bg-gradient-to-r from-blue-600 to-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2"
                                 >
                                     <FaPenNib />
                                     <span>Write</span>
@@ -156,7 +157,7 @@ export default function Header() {
                                                 alt={user?.user_name || 'User'}
                                             />
                                         ) : (
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm">
+                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm">
                                                 <FaUserCircle className="text-white text-xl" />
                                             </div>
                                         )}
@@ -173,7 +174,7 @@ export default function Header() {
                                                 className="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden"
                                             >
                                                 {/* User Info */}
-                                                <div className="px-5 py-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
+                                                <div className="px-5 py-4 bg-gradient-to-r from-blue-50 to-blue-50 border-b border-gray-200">
                                                     <div className="flex items-center gap-3">
                                                         {user?.profile_image ? (
                                                             <img
@@ -182,7 +183,7 @@ export default function Header() {
                                                                 alt={user?.user_name || 'User'}
                                                             />
                                                         ) : (
-                                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md">
+                                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
                                                                 <FaUserCircle className="text-white text-2xl" />
                                                             </div>
                                                         )}
@@ -257,7 +258,7 @@ export default function Header() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => navigate("/login")}
-                                className="ml-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200"
+                                className="ml-4 bg-gradient-to-r from-blue-600 to-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200"
                             >
                                 Sign In
                             </motion.button>
@@ -317,7 +318,7 @@ export default function Header() {
                                                 navigate("/create");
                                                 setMenuOpen(false);
                                             }}
-                                            className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold text-left"
+                                            className="px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-600 text-white rounded-lg font-semibold text-left"
                                         >
                                             <FaPenNib className="inline mr-3" />
                                             Write Article
@@ -346,7 +347,7 @@ export default function Header() {
                                             navigate("/login");
                                             setMenuOpen(false);
                                         }}
-                                        className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold text-left"
+                                        className="px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-600 text-white rounded-lg font-semibold text-left"
                                     >
                                         Sign In
                                     </button>

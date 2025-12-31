@@ -8,6 +8,7 @@ import OTPVerification from "../Pages/Auth/OTPPage";
 import ResetPassword from "../Pages/Auth/ResetPassword";
 import ProfilePage from "../Pages/Profile/ProfilePage";
 import AddBlogPage from "../Pages/Blog/AddBlog";
+import SingleBlogPage from "../Pages/Blog/BlogDetails";
 
 export const routePath = {
     login: '/login',
@@ -18,6 +19,7 @@ export const routePath = {
     home: '/',
     profile: '/profile',
     addBlog: '/create_blog',
+    featchSingleBlog: '/blog/:blogId',
 }
 
 export const router = createBrowserRouter([
@@ -57,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: routePath.addBlog,
                 Component: AddBlogPage,
+            },
+            {
+                path: routePath.featchSingleBlog,
+                Component: SingleBlogPage,
             }
         ],
     },

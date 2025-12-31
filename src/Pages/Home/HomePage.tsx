@@ -147,7 +147,7 @@ export default function HomePage() {
             <Header />
 
             {/* Premium Hero Section */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+            <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-blue-900">
                 {/* Animated Background Elements */}
                 <div className="absolute inset-0">
                     <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -229,106 +229,142 @@ export default function HomePage() {
 
             {/* Featured/Trending Blogs Section */}
             {featuredBlogs.length > 0 && (
-                <section className="bg-gradient-to-b from-gray-50 to-white py-16 border-b border-gray-200">
+                <section className="py-16 bg-white">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="flex items-center justify-between mb-10"
-                        >
-                            <div>
-                                <div className="flex items-center gap-3 mb-2">
-                                    <div className="p-2 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg">
-                                        <FaFire className="text-white text-lg" />
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Trending Now</h2>
+                        {/* Header */}
+                        <div className="mb-12">
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="p-2 bg-orange-500 rounded-lg">
+                                    <FaFire className="text-white text-lg" />
                                 </div>
-                                <p className="text-gray-600">Most popular articles this week</p>
+                                <h2 className="text-3xl font-bold text-gray-900">Trending Now</h2>
                             </div>
-                        </motion.div>
+                            <p className="text-gray-600">Most popular articles this week</p>
+                        </div>
 
-                        <div className="grid md:grid-cols-3 gap-6">
+                        {/* Blog Cards Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                             {featuredBlogs.map((blog, index) => (
-                                <motion.article
+                                <motion.div
                                     key={blog._id}
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
-                                    onClick={() => navigate(`/blog/${blog._id}`)}
-                                    className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border border-gray-100 transform hover:-translate-y-2"
+                                    className="group"
                                 >
-                                    <div className="relative h-64 overflow-hidden">
+                                    <div
+                                        onClick={() => navigate(`/blog/${blog._id}`)}
+                                        className="relative h-96 rounded-xl overflow-hidden cursor-pointer"
+                                    >
+                                        {/* Background Image */}
                                         <img
                                             src={blog.thumbnail}
-                                            className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
                                             alt={blog.title}
-                                            onError={(e) => {
-                                                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300?text=Blog+Image';
-                                            }}
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full shadow-lg">
-                                                #{index + 1} Trending
-                                            </span>
-                                        </div>
-                                        {blog.category && (
-                                            <div className="absolute top-4 right-4">
-                                                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-bold text-gray-900 rounded-full">
-                                                    {blog.category}
+
+                                        {/* Dark Overlay that appears on hover */}
+                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/70 transition-all duration-300"></div>
+
+                                        {/* Default Content (Always Visible) */}
+                                        <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                                            {/* Top - Trending Badge */}
+                                            <div className="flex items-start justify-between">
+                                                <span className="px-3 py-1.5 bg-orange-500 text-white text-xs font-bold rounded-full">
+                                                    #{index + 1} Trending
                                                 </span>
+                                                {blog.category && (
+                                                    <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold rounded-full">
+                                                        {blog.category}
+                                                    </span>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
-                                    <div className="p-6">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            {blog.author?.profile_image ? (
-                                                <img
-                                                    src={blog.author.profile_image}
-                                                    className="w-8 h-8 rounded-full border-2 border-white shadow-md"
-                                                    alt={blog.author.user_name}
-                                                />
-                                            ) : (
-                                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                                                    <FaUserCircle className="text-white text-xs" />
+
+                                            {/* Middle - Title (Always Visible) */}
+                                            <div>
+                                                <h3 className="text-white font-bold text-xl mb-2 line-clamp-2">
+
+                                                </h3>
+                                            </div>
+
+                                            {/* Bottom - Default Stats */}
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-4">
+                                                    <span className="flex items-center gap-1 text-white text-sm">
+                                                        {blog.title}
+                                                    </span>
                                                 </div>
-                                            )}
-                                            <span className="text-sm font-semibold text-gray-900">{blog.author?.user_name || "Anonymous"}</span>
-                                            <span className="text-gray-400">•</span>
-                                            <span className="text-xs text-gray-500 flex items-center gap-1">
-                                                <BiTimeFive />
-                                                {calculateReadingTime(blog.content)} min read
-                                            </span>
-                                        </div>
-                                        <h3 className="font-bold text-xl text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight">
-                                            {blog.title}
-                                        </h3>
-                                        <p className="text-gray-600 text-sm line-clamp-2 mb-4 leading-relaxed">
-                                            {blog.subtitle}
-                                        </p>
-                                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                            <div className="flex items-center gap-4 text-xs text-gray-500">
-                                                <span className="flex items-center gap-1">
-                                                    <FaHeart className="text-red-500" />
-                                                    {blog.likes || 0}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <FaCommentDots className="text-blue-500" />
-                                                    {blog.comment?.length || 0}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <FaEye className="text-gray-500" />
-                                                    {blog.views || 0}
-                                                </span>
                                             </div>
-                                            <span className="text-blue-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                                Read
-                                                <FaArrowRight />
-                                            </span>
+                                        </div>
+
+                                        {/* Hover Content - Hidden by default */}
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                            {/* Gradient Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+
+                                            {/* Hover Content Container */}
+                                            <div className="relative h-full p-6 flex flex-col justify-end">
+                                                {/* Author Info - Appears on hover */}
+                                                <div className="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                    <div className="flex items-center gap-3 mb-3">
+                                                        <div className="relative">
+                                                            {blog.author?.profile_image ? (
+                                                                <img
+                                                                    src={blog.author.profile_image}
+                                                                    className="w-10 h-10 rounded-full border-2 border-white shadow-lg"
+                                                                    alt={blog.author.user_name}
+                                                                />
+                                                            ) : (
+                                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center shadow-lg">
+                                                                    <FaUserCircle className="text-white" />
+                                                                </div>
+                                                            )}
+                                                            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-white"></div>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-bold text-sm">
+                                                                {blog.author?.user_name || "Anonymous"}
+                                                            </h4>
+                                                            <p className="text-white/80 text-xs flex items-center gap-1">
+                                                                <BiTimeFive /> {calculateReadingTime(blog.content)} min read
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Subtitle - Appears on hover */}
+                                                <div className="mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                                    <p className="text-white/90 text-sm line-clamp-2">
+                                                        {blog.title}
+                                                    </p>
+                                                </div>
+
+                                                {/* Stats - Enhanced on hover */}
+                                                <div className="flex items-center justify-between pt-4 border-t border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150">
+                                                    <div className="flex items-center gap-6">
+                                                        <div className="text-center">
+                                                            <div className="text-white font-bold text-lg">{blog.likes || 0}</div>
+                                                            <div className="text-white/80 text-xs">Likes</div>
+                                                        </div>
+                                                        <div className="text-center">
+                                                            <div className="text-white font-bold text-lg">{blog.comment?.length || 0}</div>
+                                                            <div className="text-white/80 text-xs">Comments</div>
+                                                        </div>
+                                                        <div className="text-center">
+                                                            <div className="text-white font-bold text-lg">{blog.views || 0}</div>
+                                                            <div className="text-white/80 text-xs">Views</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <button className="flex items-center gap-2 px-4 py-2 bg-white text-gray-900 rounded-full font-semibold text-sm hover:bg-gray-100 transition-colors">
+                                                        Read Full
+                                                        <FaArrowRight />
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </motion.article>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -397,7 +433,7 @@ export default function HomePage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl p-5 text-white shadow-lg relative overflow-hidden"
+                            className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-5 text-white shadow-lg relative overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
                             <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full -ml-10 -mb-10"></div>
@@ -535,7 +571,7 @@ export default function HomePage() {
                                                         alt={blog.author.user_name}
                                                     />
                                                 ) : (
-                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm">
+                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm">
                                                         <FaUserCircle className="text-white text-lg" />
                                                     </div>
                                                 )}
@@ -651,7 +687,7 @@ export default function HomePage() {
                                                                 alt={blog.author.user_name}
                                                             />
                                                         ) : (
-                                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
                                                                 <FaUserCircle className="text-white text-lg" />
                                                             </div>
                                                         )}
@@ -729,7 +765,7 @@ export default function HomePage() {
                                 transition={{ duration: 0.5 }}
                                 className="text-center py-20"
                             >
-                                <div className="inline-flex p-8 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 rounded-3xl mb-8 shadow-lg">
+                                <div className="inline-flex p-8 bg-gradient-to-br from-blue-100 via-blue-100 to-purple-100 rounded-3xl mb-8 shadow-lg">
                                     <FaBookReader className="text-7xl text-blue-500" />
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
@@ -746,7 +782,7 @@ export default function HomePage() {
                                 </p>
                                 <button
                                     onClick={() => navigate("/create")}
-                                    className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl font-bold text-lg transform hover:scale-105"
+                                    className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:via-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl font-bold text-lg transform hover:scale-105"
                                 >
                                     <FaPenNib />
                                     Create Your First Article
@@ -777,7 +813,7 @@ export default function HomePage() {
                                     <div className="absolute bottom-0 right-0 w-5 h-5 bg-green-500 rounded-full border-4 border-white"></div>
                                 </div>
                             ) : (
-                                <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full shadow-lg">
+                                <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full shadow-lg">
                                     <FaUserCircle className="w-10 h-10 text-white" />
                                 </div>
                             )}
@@ -798,7 +834,7 @@ export default function HomePage() {
 
                         <button
                             onClick={() => navigate("/profile")}
-                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-600 text-white py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
                         >
                             <FaUserEdit />
                             View Full Profile

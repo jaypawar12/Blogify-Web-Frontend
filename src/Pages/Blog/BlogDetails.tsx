@@ -55,7 +55,7 @@ const SingleBlogPage = () => {
     const getBlog = async () => {
         try {
             setLoading(true);
-            const data = await blogService.fetchSinglBlog(blogId || "");
+            const data = await blogService.fetchSingleBlog(blogId || "");
 
             if (!data.error) {
                 setBlog(data.result);
@@ -73,14 +73,10 @@ const SingleBlogPage = () => {
 
     const handleLike = () => {
         setIsLiked(!isLiked);
-        // API call for like
-        // await blogService.likeBlog(blogId);
     };
 
     const handleBookmark = () => {
         setIsBookmarked(!isBookmarked);
-        // API call for bookmark
-        // await blogService.bookmarkBlog(blogId);
     };
 
     const handleShare = async (platform?: string) => {
@@ -129,8 +125,6 @@ const SingleBlogPage = () => {
         e.preventDefault();
         if (!newComment.trim()) return;
 
-        // API call to submit comment
-        // await blogService.addComment(blogId, newComment);
         const newCommentObj = {
             id: comments.length + 1,
             userId: {
@@ -301,7 +295,7 @@ const SingleBlogPage = () => {
                             </div>
                             <div>
                                 <h3 className="font-bold text-gray-900 text-lg">{blog.author?.user_name || "Anonymous"}</h3>
-                                <p className="text-gray-600 text-sm">{blog.author?.bio || "Writer"}</p>
+                                <p className="text-gray-600 text-sm">{blog.author?.about || "Writer"}</p>
                             </div>
                         </div>
 
@@ -511,8 +505,8 @@ const SingleBlogPage = () => {
                                                         <div className="flex-shrink-0">
                                                             <div className="relative">
                                                                 <img
-                                                                    src={com.userId?.profile_image}
-                                                                    alt={com.userId?.name || "User"}
+                                                                    src={com.userId?.profile_image || "https://randomuser.me/api/portraits/men/22.jpg"}
+                                                                    alt={com.userId?.user_name || "User"}
                                                                     className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
                                                                 />
                                                                 {index === 0 && (
@@ -528,7 +522,7 @@ const SingleBlogPage = () => {
                                                             <div className="flex items-center justify-between mb-3">
                                                                 <div>
                                                                     <div className="flex items-center gap-2">
-                                                                        <h5 className="font-bold text-gray-900">{com.userId?.name || "User"}</h5>
+                                                                        <h5 className="font-bold text-gray-900">{com.userId?.user_name || "User"}</h5>
                                                                         {index === 0 && (
                                                                             <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded">
                                                                                 Author
@@ -636,7 +630,7 @@ const SingleBlogPage = () => {
                                         className="w-20 h-20 rounded-full border-4 border-white shadow-lg mb-4"
                                     />
                                     <h4 className="font-bold text-gray-900 text-xl">{blog.author?.user_name || "Anonymous"}</h4>
-                                    <p className="text-gray-600 text-sm mt-2 mb-4">{blog.author?.bio || "Writer"}</p>
+                                    <p className="text-gray-600 text-sm mt-2 mb-4">{blog.author?.about || "Writer"}</p>
                                     <button className="w-full py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium">
                                         Follow
                                     </button>

@@ -1,6 +1,6 @@
 import { FiArrowLeft, FiLock, FiEdit, FiEye, FiEyeOff } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
@@ -27,12 +27,13 @@ export default function ResetPassword() {
     });
     // console.log("Email:", email);
 
-    if (authService.getAuthToken()) {
-        return navigate(routePath.home, { replace: true });;
-    }
-    if (!email) {
-        return navigate(routePath.forgotPassword, { replace: true });;
-    }
+    useEffect(() => {
+        if (authService.getAuthToken()) {
+            navigate(routePath.home, { replace: true });
+        } else if (!email) {
+            navigate(routePath.forgotPassword, { replace: true });
+        }
+    }, [navigate, email]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

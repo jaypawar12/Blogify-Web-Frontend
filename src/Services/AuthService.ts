@@ -84,9 +84,8 @@ class AuthService {
     async changePassword(payload: ChangePasswordPayload) {
         try {
             // console.log("Payload", payload);
-            const res = axios.post(this.authBaseURL + this.authResetPassword, payload);
-            const data = await res.then(response => response.data);
-            return data;
+            const res = await axios.post(this.authBaseURL + this.authResetPassword, payload);
+            return res.data;
         } catch (error: any) {
             return {
                 error: true,

@@ -35,21 +35,23 @@ export interface Blog {
     subtitle: string;
     content: string;
     thumbnail: string;
-    author: Author;
+    author?: Author;
     category: string;
     tags: string[];
     likes: number;
     views?: number;
     create_at: string;
     update_at: string;
-    comment: Comment[];
+    comment?: Comment[];
 }
 
 export interface Author {
-    _id: string;
-    user_name: string;
-    gender: string;
-    profile_image: string;
+    _id?: string;
+    user_name?: string;
+    user_email?: string;
+    gender?: string;
+    about?: string;
+    profile_image?: string;
 }
 
 export interface Comment {

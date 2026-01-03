@@ -63,6 +63,11 @@ export default function HomePage() {
             setLoading(true);
             const res = await blogService.fetchAllBlogs();
             if (!res.error) {
+                // Debug: Check author data
+                if (res.result && res.result.length > 0) {
+                    console.log("First blog from API:", res.result[0]);
+                    console.log("Author data:", res.result[0].author);
+                }
                 dispatch(setAllBlogs(res.result));
             }
         } catch {

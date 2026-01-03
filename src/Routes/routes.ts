@@ -28,7 +28,6 @@ export const router = createBrowserRouter([
         Component: App,
         children: [
             {
-                index: true,
                 path: routePath.login,
                 Component: SignIn,
             },
@@ -49,7 +48,7 @@ export const router = createBrowserRouter([
                 Component: ResetPassword,
             },
             {
-                path: routePath.home,
+                index: true,
                 Component: HomePage,
             },
             {
